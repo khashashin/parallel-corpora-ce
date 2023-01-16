@@ -12,12 +12,22 @@ def main():
                     amount = len(ce_data.keys())
 
                     for key in ce_data.keys():
-                        data_ce_ru.write(f'{ce_data[key]}\t{ru_data[key]}\n')
-                        data_ru_ce.write(f'{ru_data[key]}\t{ce_data[key]}\n')
+                        lower_ce_sentence = ce_data[key].lower()
+                        lower_ru_sentence = ru_data[key].lower()
+
+                        lower_ce_sentence = lower_ce_sentence.replace('[', '')
+                        lower_ce_sentence = lower_ce_sentence.replace(']', '')
+                        lower_ru_sentence = lower_ru_sentence.replace('[', '')
+                        lower_ru_sentence = lower_ru_sentence.replace(']', '')
+
+                        lower_ce_sentence = lower_ce_sentence.replace('і', 'ӏ')
+
+                        data_ce_ru.write(f'{lower_ce_sentence}\t{lower_ru_sentence}\n')
+                        data_ru_ce.write(f'{lower_ru_sentence}\t{lower_ce_sentence}\n')
 
                         print(f'Amount of verses: {amount}')
                         amount -= 1
 
-# Press the green button in the gutter to run the script.
+
 if __name__ == '__main__':
     main()
