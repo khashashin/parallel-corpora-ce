@@ -1,4 +1,5 @@
 import json
+import re
 
 
 def main():
@@ -21,6 +22,10 @@ def main():
                         lower_ru_sentence = lower_ru_sentence.replace(']', '')
 
                         lower_ce_sentence = lower_ce_sentence.replace('і', 'ӏ')
+
+                        # replace using regex \s\([\d]+\) with ''
+                        lower_ce_sentence = re.sub(r'\s\([\d]+\)', '', lower_ce_sentence)
+                        lower_ru_sentence = re.sub(r'\s\([\d]+\)', '', lower_ru_sentence)
 
                         data_ce_ru.write(f'{lower_ce_sentence}\t{lower_ru_sentence}\n')
                         data_ru_ce.write(f'{lower_ru_sentence}\t{lower_ce_sentence}\n')
